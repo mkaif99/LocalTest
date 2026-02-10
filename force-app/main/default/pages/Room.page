@@ -1,0 +1,42 @@
+<apex:page title="Room" Controller="RoomController" tabStyle="Contact">
+    <apex:sectionHeader title="Our Room" subtitle="Room"/>
+    <apex:form >										 <!--	we take Id below because it uniquely maintain by salesforce server -->
+        <apex:pageBlock title="Input New Room" rendered="{!if(roomObj.Id == null || isEdit==true,true,false)}" > 
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!saveRecord}"/>
+            <apex:commandButton value="QuickSave" action="{!SaveAndGo}"/>
+            <apex:commandButton value="Save and New" action="{!saveNew}"/>
+            <apex:commandButton value="Cancel" action="/a0F/o" immediate="true" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Information" collapsible="false">
+            <apex:inputField value="{!roomObj.Room_No__c}"/>
+            <apex:inputField value="{!roomObj.Room_Status__c}"/> 
+            <apex:inputField value="{!roomObj.Type__c}"/>
+            <apex:inputField value="{!roomObj.Facilities__c}"/> 
+            <apex:inputField value="{!roomObj.Room_Charges__c}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    <apex:pageBlock title="Output New Room" rendered="{!if(roomObj.Id != null && isEdit==false,true,false)}" >
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Edit" action="{!editRecord}"/>
+            <apex:commandButton value="Delete" action="{!deleteRecord}"/>
+            <apex:commandButton value="Clone" action="{!cloneRecord}" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Information" collapsible="false">
+            <apex:outputField value="{!roomObj.Room_No__c}"/>
+            <apex:outputField value="{!roomObj.Room_Status__c}"/> 
+            <apex:outputField value="{!roomObj.Type__c}"/>
+            <apex:outputField value="{!roomObj.Facilities__c}"/> 
+            <apex:outputField value="{!roomObj.Room_Charges__c}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>    
+    </apex:form>
+    
+     <apex:pageBlock title="Hotel Booking(s)">						
+    	<apex:pageBlockTable value="{!roomObj.Hotel_Bookings__r}" var="enr" >
+            <apex:column value="{!enr.Hotel_Customer__c}"/>  &nbsp;&nbsp;
+            <apex:column value="{!enr.Amount__c}"/> &nbsp;&nbsp;
+            <apex:column value="{!enr.Status__c	}"/> &nbsp;&nbsp;
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

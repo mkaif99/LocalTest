@@ -1,0 +1,39 @@
+<!-- Start Location -->
+<template>
+<lightning-input
+    label="Search Start Location"
+    type="text"
+    value={searchStart}
+    onchange={updateStartInput}>
+</lightning-input>
+<lightning-button label="Search" onclick={searchStartLocation} class="slds-m-bottom_small"></lightning-button>
+
+<template if:true={filteredStartLocations.length}>
+    <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid">
+        <template for:each={filteredStartLocations} for:item="loc">
+            <li key={loc.name} class="slds-listbox__item" onclick={selectStartLocation}>
+                <span class="slds-listbox__option slds-listbox__option_plain">{loc.name}</span>
+            </li>
+        </template>
+    </ul>
+</template>
+
+<!-- End Location -->
+<lightning-input
+    label="Search End Location"
+    type="text"
+    value={searchEnd}
+    onchange={updateEndInput}>
+</lightning-input>
+<lightning-button label="Search" onclick={searchEndLocation} class="slds-m-bottom_small"></lightning-button>
+
+<template if:true={filteredEndLocations.length}>
+    <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid">
+        <template for:each={filteredEndLocations} for:item="loc">
+            <li key={loc.name} class="slds-listbox__item" onclick={selectEndLocation}>
+                <span class="slds-listbox__option slds-listbox__option_plain">{loc.name}</span>
+            </li>
+        </template>
+    </ul>
+</template>
+</template>

@@ -1,0 +1,37 @@
+<apex:page controller="PaginationController" tabStyle="MyProduct__c" >
+    <apex:sectionHeader title="Pagination" subtitle="Pagesize" />
+    <apex:form >
+        <apex:actionFunction name="actOnPagesize" action="{!selectSize}"/>
+        <apex:actionFunction name="actOnPageNum" action="{!goPage}" />
+    	<apex:pageBlock title="All Course" >
+            <apex:pageBlockSection columns="1" >
+                Select No. &nbsp; : &nbsp; <apex:selectList value="{!pageSize}" onchange="actOnPagesize();return false;" size="1" >
+                	<apex:selectOption itemLabel="--none--" itemValue=""></apex:selectOption>
+                    <apex:selectOption itemLabel="10" itemValue="10"></apex:selectOption>
+                    <apex:selectOption itemLabel="15" itemValue="15"></apex:selectOption>
+                    <apex:selectOption itemLabel="20" itemValue="20"></apex:selectOption>
+                    <apex:selectOption itemLabel="30" itemValue="30"></apex:selectOption>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+                <apex:pageBlockTable value="{!CourseList}" var="p" > 
+                    <apex:column value="{!p.Type_Of_Course__c}" />
+                    <apex:column value="{!p.Course_Title__c}" />
+                    <apex:column value="{!p.Duration__c}" />
+                    <apex:column value="{!p.Fees__c}" />
+                </apex:pageBlockTable>
+            <br/>
+            <br/>
+                <apex:outputPanel style="margin-left:35%;" >
+                	<apex:commandLink value="First (|<<)" action="{!firstpage}" />
+                    <apex:commandLink value="Prev (<<)" action="{!prevpage}" />
+                    <apex:commandLink value="Next (>>)" action="{!nextpage}" />
+                    <apex:commandLink value="Last (>>|)" action="{!lastpage}" />
+                </apex:outputPanel>
+                <apex:outputPanel style="float:right;" >
+                	Select Page&nbsp;:&nbsp;<apex:inputText value="{!pageNum}" size="1" onchange="actOnPageNum();return; false;" />&nbsp;&nbsp;{!TotalPages}
+                </apex:outputPanel>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

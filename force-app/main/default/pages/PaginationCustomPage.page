@@ -1,0 +1,35 @@
+<apex:page controller="PaginationCustomController" tabStyle="Course__c" >
+    <apex:sectionHeader title="Pagination" subtitle="Pagesize" />
+    <apex:form >
+      <!--  <apex:actionFunction name="actOnPagesize" action="{!selectSize}"/>  	-->
+        <apex:actionFunction name="actOnPageNum" action="{!getPageNumber}" />
+         <apex:actionFunction name="actOnPagesize1" action="{!selectPageSize}" />
+    	<apex:pageBlock title="All Course" >
+            <apex:pageBlockSection columns="1" >
+                Select No. &nbsp; : &nbsp; <apex:selectList value="{!pageSize}" onchange="actOnPagesize1();return false;" size="1" >
+                	<apex:selectOptions value="{!pageSizeList}" ></apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            
+                <apex:pageBlockTable value="{!courseList}" var="p" > 
+                    <apex:column value="{!p.Name}" />
+                    <apex:column value="{!p.Type_Of_Course__c}" />
+                    <apex:column value="{!p.Course_Title__c}" />
+                    <apex:column value="{!p.Duration__c}" />
+                    <apex:column value="{!p.Fees__c}" />
+                </apex:pageBlockTable>
+            <br/>
+            <br/>
+            	    <apex:outputPanel style="margin-left:35%;" >
+                	<apex:commandLink value="First (|<<)" action="{!firstPage}" />
+                    <apex:commandLink value="Prev (<<)" action="{!prevPage}" />
+                    <apex:commandLink value="Next (>>)" action="{!nextPage}" />
+                    <apex:commandLink value="Last (>>|)" action="{!lastPage}" />
+                </apex:outputPanel>
+                <apex:outputPanel style="float:right;" >
+                	Select Page&nbsp;:&nbsp;<apex:inputText value="{!pageNum}" size="1" onchange="actOnPageNum();return; false;" />&nbsp;&nbsp;{!totalPage}
+                </apex:outputPanel>	
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

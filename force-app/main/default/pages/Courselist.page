@@ -1,0 +1,54 @@
+<apex:page standardController="Course__c">
+    <apex:sectionHeader title="list"/>
+    <apex:relatedList list="Enrollments__r" />
+    <apex:pageBlock title="Repeat Tag">									<!-- 1st way -->
+        <apex:repeat value="{!Course__c.Enrollments__r}" var="enr" >	<!--var(enr) like counter variable -->
+            {!enr.Name} &nbsp;&nbsp;
+            <apex:outputField value="{!enr.Enrollment_Date__c}"/>
+        </apex:repeat>
+    </apex:pageBlock>
+     <apex:pageBlock >
+  <!--      <apex:repeat value="{!Student__c.Fee_Detail__c}" var="enr">
+            <apex:outputField value="{!enr.Student__c}" />
+	</apex:repeat>	why we can't like this ->		 
+     </apex:pageBlock>
+    <apex:pageBlock title="DataList">									<!-- 2nd way -->
+    	<apex:dataList value="{!Course__c.Enrollments__r}" var="enr" >
+            {!enr.Name} &nbsp;&nbsp; 
+            <!-- <apex:outputField value="{!e.Name}"></apex:outputField> -->
+            <apex:outputField value="{!enr.Enrollment_Date__c}"/>
+            <apex:outputField value="{!enr.Enrolling_Student__c}"/> <!--{!enr.Enrolling_Student__c}"/ -->
+        </apex:dataList> 
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="DataTable Tag">								<!-- 3rd way -->
+    	<apex:dataTable value="{!Course__c.Enrollments__r}" var="enr" >
+            <apex:column value="{!enr.Name}"/>  
+            <apex:column value="{!enr.Enrollment_Date__c}"/> 
+            <apex:column value="{!enr.Enrolling_Student__c}"/> 
+        </apex:dataTable>
+    </apex:pageBlock>
+    
+     <apex:pageBlock title="PageBlockTable Tag">						<!-- 4th way -->
+    	<apex:pageBlockTable value="{!Course__c.Enrollments__r}" var="enr" >
+            <apex:column value="{!enr.Name}"/>  &nbsp;&nbsp;
+            <apex:column value="{!enr.Enrollment_Date__c}"/> &nbsp;&nbsp;
+            <apex:column value="{!enr.Enrolling_Student__c}"/> &nbsp;&nbsp;
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    
+    <apex:pageBlock title="HTML Tabletag">								<!-- 5th way -->
+        <table border="1" align="center" width="100%" class="list">
+            <tr class="headerRow">
+                <th>Name</th>
+                <th>Date</th>
+            </tr>
+            <apex:repeat value="{!Course__c.Enrollments__r}" var="enr" >
+            <tr class="dataRow">
+            	<td class="dataCell">{!enr.Name}</td>
+                <td class="dataCell"><apex:outputField value="{!enr.Enrollment_Date__c}" /> </td>
+            </tr>
+            </apex:repeat>
+        </table> 	
+    </apex:pageBlock>
+</apex:page>

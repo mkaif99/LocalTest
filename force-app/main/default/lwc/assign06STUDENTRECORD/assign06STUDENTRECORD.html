@@ -1,0 +1,58 @@
+<template>
+    <lightning-card  title = 'Student Lists' icon-name="standard:student" >
+        <template for:each={conRec} for:item="num">
+            <div key={num}>
+                <!-- Outer Grid -->
+                <div class="slds-grid slds-gutters slds-p-around_medium" style="margin: 1px;">
+                    <!-- Icon Section -->
+                    <div class="slds-col slds-size_1-of-12 slds-align_absolute-center" style="display: flex; align-items: center; justify-content: center;">
+                        <lightning-icon icon-name="action:new_custom1" alternative-text="new_custom1" size="small" title="new_custom1"></lightning-icon>
+                    </div>
+                    
+                    <!-- Details Section -->
+                    <div class="slds-col slds-size_8-of-12" style="display: flex; flex-direction: column; justify-content: center;">
+                        <strong>
+                            <h2 style="margin: 0;">{num.Full_Name__c}</h2>
+                        </strong>
+                    </div>
+        
+                    <!-- Button Section -->
+                    <div class="slds-col slds-size_3-of-12 slds-align_absolute-center" style="display: flex; align-items: center; justify-content: flex-end;">
+                        <lightning-button
+                            type="button"
+                            label="Show Details"
+                            variant="brand"
+                            value={num.Id}
+                            onclick={handleclick}
+                        ></lightning-button>
+                    </div>
+                </div>
+        
+                <!-- Residence Section -->
+                <div style="margin-left: 18px; margin-top: 2px; margin-bottom: 12px; padding: 4px;">
+                    <p style="margin: 0;">Residence in: {num.City__c}</p>
+                </div>
+            </div>
+        </template>
+        
+        <!-- <template for:each={conRec} for:item="num" >
+            <div key={num}>
+                <div class="slds-grid slds-gutters slds-size_6-of-12" style="margin:2px;">
+                    <div class="slds-col slds-size_2-of-12">
+                        <lightning-icon icon-name='action:new_custom1' alternative-text='new_custom1' size='small' title='new_custom1'></lightning-icon>
+                            <strong >
+                                <h2>num.FullName</h2>
+                            </strong>
+                    </div>
+                    <b>Residence in :</b>num.City
+                    <lightning-button 
+                        type="button"
+                        label="show Details"
+                        variant="info"  
+                    ></lightning-button>
+                    
+                </div>
+            </div>
+        </template> -->
+    </lightning-card>
+</template>

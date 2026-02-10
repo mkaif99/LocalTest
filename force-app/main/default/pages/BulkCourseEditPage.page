@@ -1,0 +1,75 @@
+<apex:page controller="BulkCourseEditController" tabStyle="Course__c" sidebar="false" >
+    <apex:sectionHeader title="BulkEdit & Delete" subtitle="CourseList" />
+    <script>
+    	function deleteConfirm(){
+        	let ans = confirm("Are You Sure...!");
+            if(ans == true){
+                alert("You can Delete");
+                myfun();
+            }
+            else			alert("Nhi kr skte");
+        }
+    
+    </script>
+    <apex:form >
+     <!--   <apex:actionStatus id="act1" startText="Please Wait...!!!" stopText="Done...!!!" style="font-size:12pt;color:red" /> -->
+        <apex:actionStatus id="act1">
+        	<apex:facet name="start">
+                <apex:outputPanel >
+                    <apex:image value="/img/loading.gif" width="30" height="30" />
+                    <apex:outputLabel value="Please wait...!" style="font-size:16px;color:red" ></apex:outputLabel>                    
+                </apex:outputPanel>
+            </apex:facet>
+        </apex:actionStatus>
+        <apex:actionFunction name="myfun" action="{!deleteAll}"   />  			<!-- don't put () this on name -->
+        <apex:actionFunction name="ChangeOnClick" action="{!allSelected}" status="act1" reRender="cl" />
+        <apex:pageBlock title="EditPages" rendered="{!isEdit}" >
+        	<apex:pageBlockButtons >
+            	<apex:commandButton value="Save" action="{!saveAll}" />
+                <apex:commandButton value="Cancel" action="{!cancelAll}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!editCousreList}" var="ed">
+                <apex:column headerValue="RowNo" >
+               <!-- 	<apex:column value="{!modalList.rowNum}" /> -->
+                </apex:column>
+                <apex:column headerValue="CourseType" >
+                	<apex:inputField value="{!ed.Type_Of_Course__c}" />
+                </apex:column>
+                <apex:column headerValue="CourseTitle" >
+                	<apex:inputField value="{!ed.Course_Title__c}" />
+                </apex:column>
+                <apex:column headerValue="Duration" >
+                	<apex:inputField value="{!ed.Duration__c}" />
+                </apex:column>
+                <apex:column headerValue="Fees" >
+                	<apex:inputField value="{!ed.Fees__c}" />
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+    	<apex:pageBlock title="Courses" rendered="{!!isEdit}" id="cl" >
+            <pageBlockButton >
+            	<apex:commandButton value="Edit All" action="{!editAll}" />
+                <apex:commandButton value="Delete All" onclick="deleteConfirm();return false;" />
+            </pageBlockButton>
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockTable value="{!modalList}" var="cl">
+                    <apex:column >
+                        <apex:facet name="header" >
+                            <apex:inputCheckbox value="{!allSelect}" onchange="ChangeOnClick();return false;" />	
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!cl.selectstatus}" />			
+                    </apex:column>
+                    <apex:column value="{!cl.rowNum}" headerValue="RowNo#" />
+                    <!--        <apex:column>
+					<apex:param name="r1" value="{!cl.rowNum}" assignTo="{!Index}"/>
+					</apex:column>		-->
+                    <apex:column value="{!cl.courseObj.Type_Of_Course__c}" />
+                    <apex:column value="{!cl.courseObj.Course_Title__c}" />
+                    <apex:column value="{!cl.courseObj.Duration__c}" />
+                    <apex:column value="{!cl.courseObj.Fees__c}" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

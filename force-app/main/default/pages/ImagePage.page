@@ -1,0 +1,10 @@
+<apex:page sidebar="false" >
+   <!-- <apex:image value="/servlet/servlet.FileDownload?file=00P2t00000QA8Z0" height="400" width="300" /> <br/>  by attachment --> 
+    
+   <apex:pageBlock >
+       <apex:pageBlockSection columns="2" >
+           <apex:image value="{!$Resource.First_Image}" height="400" width="600" style="margin-left:30px" />
+           <apex:image value="{!$Resource.Second_Image}" height="400" width="600" />
+       </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

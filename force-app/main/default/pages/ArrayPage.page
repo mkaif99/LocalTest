@@ -1,0 +1,21 @@
+<apex:page controller="ArrayController" tabStyle="Student__c" >
+    <apex:sectionHeader title="Array Demo" />
+	<apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+    	<apex:pageBlock title="ArrayList">
+            Enter Value for Array &nbsp;&nbsp;
+        	<apex:inputText value="{!numdata}" size="2"/> &nbsp;&nbsp;
+            <apex:commandButton value="Add" action="{!addData}" />&nbsp;&nbsp;
+            <apex:commandButton value="Remove" action="{!removeData}" />&nbsp;&nbsp;
+            <apex:commandButton value="Search" action="{!searchData}" /><br/><br/><br/>
+            
+            <apex:pageBlockSection title="Arrays value" collapsible="false" columns="1">
+                <apex:outputPanel >		<!-- with outputPanel comes in single line-->
+            		<apex:repeat value="{!numlist}" var="n">
+                		{!n} &nbsp;&nbsp;
+               		</apex:repeat>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

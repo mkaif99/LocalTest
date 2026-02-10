@@ -1,0 +1,96 @@
+<apex:page title="Course Page" standardController="Course__c">
+	<apex:sectionHeader title="Course Edit" subtitle="New Course"/>
+  <!--  <apex:form>
+        <apex:pageBlock title="Course Edit">
+        	<apex:pageBlockButtons>
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Quick Save" action="{!quicksave}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:pageBlockButtons>
+            <apex:PageBlockSectionItem>
+            	<apex:outputLabel>Course Title</apex:outputLabel>
+                <apex:inputText />
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem>
+            	<apex:outputLabel>Course Type</apex:outputLabel>
+                <apex:inputText />
+            </apex:PageBlockSectionItem>
+            
+            <apex:pageBlockSection title="Smart Tag" collapsible="false">
+                <apex:inputField value="{!begginers__Course__c.begginers__Course_Title__c}"/>
+                <apex:inputField value="{!begginers__Course__c.begginers__Course_Type__c}"/>
+                <apex:inputField value="{!begginers__Course__c.begginers__Course_Duration__c}"/>
+                <apex:inputField value="{!begginers__Course__c.begginers__Course_Fees__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>	-->
+    <apex:form >
+    	<apex:PageBlock >
+        	<apex:PageBlockButtons >
+            	<apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Quick Save" action="{!quicksave}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:PageBlockButtons>
+            <apex:pageBlockSection >
+            <apex:PageBlockSectionItem >
+                <apex:outputLabel >Course Title</apex:outputLabel>
+                <apex:inputText />
+            </apex:PageBlockSectionItem>
+             <apex:PageBlockSectionItem >
+                <apex:outputLabel >Course Type</apex:outputLabel>
+                <apex:inputText /> 
+            </apex:PageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:PageBlock>
+    	
+    	<apex:PageBlock title="Course Input">
+        	<apex:PageBlockButtons location="top">
+            	<apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Quick Save" action="{!quicksave}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}"/>
+            </apex:PageBlockButtons>
+            <apex:pageBlockSection collapsible="false">
+                <apex:inputField value="{!Course__c.Course_Title__c}"/>
+                <apex:inputField value="{!Course__c.Duration__c}"/>
+            	<apex:inputField value="{!Course__c.Type_Of_Course__c}"/>                           
+                <apex:inputField value="{!Course__c.Fees__c}"/>
+                <apex:inputField value="{!Course__c.Subjets__c}"/>
+            </apex:pageBlockSection>
+        </apex:PageBlock>
+            
+        <apex:PageBlock >
+             <apex:PageBlockButtons >
+            	<apex:commandButton value="Edit" />
+                <apex:commandButton value="Clone" />
+                <apex:commandButton value="Delete" />
+            </apex:PageBlockButtons>
+            <apex:pageBlockSection title="Course Output" collapsible="false">
+                <apex:outputField value="{!Course__c.Course_Title__c}"/>
+                <apex:outputField value="{!Course__c.Duration__c}"/>
+            	<apex:outputField value="{!Course__c.Type_Of_Course__c}"/>                           
+                <apex:outputField value="{!Course__c.Fees__c}"/>
+                <apex:outputField value="{!Course__c.Subjets__c}"/>
+            </apex:pageBlockSection>
+        </apex:PageBlock>
+    </apex:form>
+</apex:page>
+<!--  This is smart tag used in Roomwith standard 
+<apex:page title="Room" standardController="Room__c" tabStyle="Contact">
+    <apex:sectionHeader title="Our Room" subtitle="Room"/>
+    <apex:form >
+    <apex:pageBlock title="New Room">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save" action="{!save}"/>
+            <apex:commandButton value="QuickSave" action="{!quickSave}"/>
+            <apex:commandButton value="Cancel" action="/a0F/o" immediate="true" />
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Information" collapsible="false">
+            <apex:inputField value="{!Room__c.Room_No__c}"/>
+            <apex:inputField value="{!Room__c.Room_Status__c}"/> 
+            <apex:inputField value="{!Room__c.Type__c}"/>
+            <apex:inputField value="{!Room__c.Facilities__c}"/> 
+            <apex:inputField value="{!Room__c.Room_Charges__c}" />
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>	-->

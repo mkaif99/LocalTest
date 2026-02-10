@@ -1,0 +1,50 @@
+<apex:page controller="EmployeeController" >
+    <apex:sectionHeader title="Employees" subtitle="Employee List" />
+    <apex:form >
+    	<apex:pageBlock >
+    		<apex:pageBlockButtons > 
+            	<apex:commandButton value="save" action="{!saveEmp}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Input Employee" collapsible="false" columns="1" rendered="{!isEdit}">
+                <apex:pageBlockSectionItem >
+            		<apex:outputLabel value="Employee No :" ></apex:outputLabel>
+                	<apex:inputText value="{!eObj.EmpNo}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Employee Name :" ></apex:outputLabel>
+                	<apex:inputText value="{!eObj.EmpName}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Employee Gender :" ></apex:outputLabel>
+                    <apex:selectList value="{!eObj.Gender}" size="1">
+                        <apex:selectOption itemLabel="--NONE--" itemValue="" ></apex:selectOption>
+                    	<apex:selectOption itemLabel="Male" itemValue="Male" ></apex:selectOption>
+                        <apex:selectOption itemLabel="Female" itemValue="Female" ></apex:selectOption>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Employee salary :" ></apex:outputLabel>
+               	 	<apex:inputText value="{!eObj.salary}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+    	
+        	<apex:pageBlockSection title="Employee Data" collapsible="false" columns="1">
+            	<apex:pageBlockTable value="{!EmployeeList}" var="Em">
+                    <apex:column value="{!Em.RecordNo}" headerValue="#RowNo" />
+                    <apex:column headerValue="Action" >
+                        <apex:commandLink value="Edit" action="{!Edit}">
+                        	<apex:param name="E1" value="{!Em.RecordNo}" assignTo="{!Index}" />
+                        </apex:commandLink>&nbsp;|&nbsp;
+                        <apex:commandLink value="Del" action="{!deleteRec}" >
+                            <apex:param name="E1" value="{!Em.RecordNo}" assignTo="{!Index}" />
+                        </apex:commandLink>
+                    </apex:column>
+                	<apex:column value="{!Em.EmpNo}" headerValue="EmployeeNo" />
+                    <apex:column value="{!Em.EmpName}" headerValue="EmployeeName" />
+                    <apex:column value="{!Em.Gender}" headerValue="Gender" />
+                    <apex:column value="{!Em.salary}" headerValue="EmployeeSalary" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

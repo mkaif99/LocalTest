@@ -1,0 +1,46 @@
+<apex:page controller="RecordExportController" tabStyle="MyProduct__c" sidebar="false">
+    <apex:sectionHeader title="MyProduct" subtitle="Record(s) Export" />
+    <apex:form >
+        <apex:actionFunction name="actOnEmailSend" action="{!EmailIdSelection}" />
+        <apex:pageMessages ></apex:pageMessages>
+    	<apex:pageBlock >
+            <apex:pageBlockButtons >
+            	<apex:commandButton value="Send Record(s)" action="{!sendRecords}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="false" columns="1" title="Email Section">
+            	<apex:pageBlockSectionItem >
+                	<apex:outputLabel >Enter Email Subject</apex:outputLabel>
+                    <apex:inputText size="50" value="{!emailSubject}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel >Enter To Address(s) </apex:outputLabel>
+                    <apex:inputText size="50" value="{!toAddresses}"  />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel >Enter Email Body</apex:outputLabel>
+                    <apex:inputTextarea rows="7" cols="50" value="{!emailBody}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        	<apex:pageBlockSection columns="1" collapsible="false" title="Record(s) Section">
+            	<apex:pageBlockTable value="{!custModalList}" var="prod">
+                	<apex:column >
+                        <apex:facet name="header">
+                        	<apex:inputCheckbox value="{!allSelect}" />
+                        </apex:facet>
+                    	<apex:inputCheckbox value="{!prod.selectStatus}" onchange="actOnEmailSend();return false;" />
+                    </apex:column>
+                    <apex:column value="{!prod.rowNum}" headerValue="RowNo#" />
+                    <apex:column value="{!prod.hObj.First_Name__c}" />
+                    <apex:column value="{!prod.hObj.Last_Name__c}" />
+                    <apex:column value="{!prod.hObj.Gender__c}" />
+                    <apex:column value="{!prod.hObj.State__c}" />
+                    <apex:column value="{!prod.hObj.City__c}" />
+                    <apex:column value="{!prod.hObj.Phone_No__c}" />
+                    <apex:column value="{!prod.hObj.Email_ID__c}" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

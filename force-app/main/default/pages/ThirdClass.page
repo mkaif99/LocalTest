@@ -1,0 +1,7 @@
+<apex:page standardController="Student__c">
+    <h1>
+        Third Window...!!
+    </h1>
+    <apex:detail relatedList="false"/>
+    <apex:relatedList list="Enrollments__r"/>
+</apex:page>

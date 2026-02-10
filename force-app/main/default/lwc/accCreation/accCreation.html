@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Create Account" icon-name="standard:account">
+        <div class="slds-m-top_medium slds-m-bottom_x-large">
+            <template if:true={isAccountCreated}>
+                <lightning-input type="text" value={accountObjId} data-name="txtAccId" label="Enter Account Id" disabled></lightning-input>
+            </template>
+            <lightning-input type="text" data-name="txtAccName" label="Enter Account Name" required></lightning-input>
+            
+            <lightning-input type="Phone" data-name="txtAccPhone" label="Enter Phone No"></lightning-input>
+            
+            <lightning-input type="text" data-name="txtAccCity" label="Enter Account City"></lightning-input>
+        </div>
+        <div class="slds-m-around-small" slot="footer">
+            <template if:false={isAccountCreated}>
+                <lightning-button variant="brand" label="SAVE" title="Primary action Create" onclick={handleCreate} 
+                class="slds-m-left_x-small" name="cmdSave"></lightning-button>
+            </template>
+            <template if:true={isAccountCreated}>
+                <lightning-button variant="brand" label="SAVE" title="Primary action Create" onclick={handleCreate} 
+                class="slds-m-left_x-small" name="cmdSave" disabled></lightning-button>
+            </template>
+            <template if:true={isAccountCreated}>
+                <lightning-button variant="brand-outline" label="Reset" title="Primary action Reset"
+                onclick={handleReset} class="slds-m-left_x-small" name="cmdReset"></lightning-button>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,63 @@
+<apex:page controller="ContactController" sidebar="false" showHeader="false">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <apex:pageBlock >     
+        <nav class="navbar navbar-expand-sm navbar-light bg-secondary">
+            <a class="navbar-brand" href="#"><apex:pageBlockSection columns="1" >
+                <apex:image value="{!$Resource.HotelLogo}" height="60" width="100" style="margin-left:5px" />
+                </apex:pageBlockSection></a>
+     
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size:17px;font-style:Italic;">
+                <ul class="navbar-nav mr-auto"> 
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/HotelRoomPage">Hotel Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelPage">Hotel Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBookingPage">Hotel Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBillPage">Hotel Bill</a>
+                    </li>
+                </ul>
+                <button class="nav-item" style="border:2px ridge gray;border-radius:40px;margin-left:40px;font-style:italic">
+                        <a class="nav-link" href="/ContactPage">Contact Us</a>
+                </button>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button >
+                    <a href="/HotelMainPage">HOME</a>
+                </button>
+            </div>
+        </nav>
+    </apex:pageBlock>
+    <apex:form >
+        <apex:messages ></apex:messages>
+        <apex:pageBlock title="Contact" >
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Send" action="{!newRecord}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection collapsible="false" columns="1"> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >NAME</apex:outputLabel>
+                    <apex:inputField value="{!cObj.Name__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >EMAIL ID</apex:outputLabel> 
+                    <apex:inputField value="{!cObj.EmailId__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >PHONE NO</apex:outputLabel>
+                    <apex:inputField value="{!cObj.Phone_No__c}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

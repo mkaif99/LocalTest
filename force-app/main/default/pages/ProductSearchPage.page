@@ -1,0 +1,39 @@
+<apex:page controller="ProductSearchController" tabStyle="MyProduct__c" >
+    <apex:sectionHeader title="MyProduct" subtitle="Searching" />
+    <apex:form >
+    	<apex:pageBlock title="Product searching" >
+        	Search : &nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:inputText value="{!searchsingleData}" />
+            <apex:commandButton value="GO.!" action="{!search1}" />
+            <br/>
+            <br/>
+            <!--  	ProductBrand : &nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:selectList value="{!searchdata}" size="1">
+				<apex:selectOption itemValue="--none--" itemLabel=""></apex:selectOption>
+                <apex:selectOption itemValue="Sony" itemLabel="Sony"></apex:selectOption>
+                <apex:selectOption itemValue="Phillips" itemLabel="Phillips"></apex:selectOption>
+                <apex:selectOption itemValue="Syska" itemLabel="Syska"></apex:selectOption>
+            </apex:selectList> &nbsp;&nbsp;&nbsp;&nbsp;		-->
+            ProductBrand : &nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:selectList value="{!searchdata}" size="1">
+				<apex:selectOption itemValue="" itemLabel="--none--"></apex:selectOption>
+                <apex:selectOption itemValue="Product_Name__c" itemLabel="Product Name"></apex:selectOption>
+                <apex:selectOption itemValue="Brand__c" itemLabel="Brand"></apex:selectOption>
+                <apex:selectOption itemValue="Rate__c" itemLabel="Rate"></apex:selectOption>
+                <apex:selectOption itemValue="Stock__c" itemLabel="Stock"></apex:selectOption>
+            </apex:selectList> &nbsp;&nbsp;&nbsp;&nbsp;
+            Search Criteria : &nbsp;&nbsp;&nbsp;&nbsp;
+            <apex:inputText value="{!searchCriteria}" />
+            <apex:commandButton value="Go.." action="{!search2}" />
+            
+            <apex:pageBlockSection title="Product List" collapsible="false">
+            	<apex:pageBlockTable value="{!productList}" var="pl" >
+                	<apex:column value="{!pl.Product_Name__c}" />
+                    <apex:column value="{!pl.Brand__c}" />
+                    <apex:column value="{!pl.Rate__c}" />
+                    <apex:column value="{!pl.Stock__c}" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

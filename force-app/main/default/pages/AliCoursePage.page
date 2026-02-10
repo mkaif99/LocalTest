@@ -1,0 +1,18 @@
+<apex:page standardController="Course__c" title="MyCourseList" recordSetVar="courseList" > <!-- this is used for show list view of obj -->
+    <apex:sectionHeader title="Course" subtitle="RecordList" />
+    <apex:form >
+    <apex:pageBlock >
+        <apex:variable var="rowNo" value="{!1}"  />				<!-- This is used for numbering -->
+    	<apex:pageBlockTable value="{!courseList}" var="crs" >
+            <apex:column value="{!rowNo}" headerValue="RowNo" />
+        	<apex:column value="{!crs.Course_Title__c}" />
+            <apex:column value="{!crs.Duration__c}" />
+            <apex:column value="{!crs.Type_Of_Course__c}" />
+            <apex:column value="{!crs.Fees__c}" />
+            <apex:column >		<!-- use column tag for chaning output -->
+            	<apex:variable value="{!rowNo+1}" var="rowNo"/>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>  
+        </apex:form>
+</apex:page>

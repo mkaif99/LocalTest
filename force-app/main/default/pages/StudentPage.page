@@ -1,0 +1,38 @@
+<apex:page standardController="Student__c" title="Student Page">
+    <apex:sectionHeader title="Student Title" subtitle="New Student"/>
+    <apex:form >
+    	<apex:pageBlock title="Student Edit(INPUT)" rendered="{!if(Student__c.Id==null,true,false)}">  <!-- Student__c.Id==null also only used-->
+        	<apex:pageBlockButtons >
+            	<apex:commandButton value="Save" action="{!quickSave}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2" collapsible="false" title="Information">
+                <apex:inputField value="{!Student__c.First_Name__c}"/>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel >Owner</apex:outputLabel>
+                    <apex:outputLabel value="{!$User.FirstName} {!$User.LastName}"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!Student__c.Last_Name__c}"/>
+                <apex:outputLabel ></apex:outputLabel>
+                <apex:inputField value="{!Student__c.Gender__c}"/>
+                <apex:inputField value="{!Student__c.DOB__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Student Edit(OUTPUT)" rendered="{!if(Student__c.Id!=null,true,false)}"> <!-- Student__c.Id!=null also only used-->
+        	<apex:pageBlockButtons >
+            	<apex:commandButton value="Edit"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="2" collapsible="false" title="Information">
+                <apex:outputField value="{!Student__c.First_Name__c}"/>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel >Owner</apex:outputLabel>
+                    <apex:outputLabel value="{!$User.FirstName} {!$User.LastName}"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:outputField value="{!Student__c.Last_Name__c}"/>
+                <apex:outputField value="{!Student__c.Gender__c}"/>
+                <apex:outputField value="{!Student__c.DOB__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

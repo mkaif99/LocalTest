@@ -1,0 +1,24 @@
+<template>
+        <div class="slds-m-around_small">
+            <lightning-card title = 'Choose City' icon-name="standard:list">
+                <lightning-combobox
+                    name="progress"
+                    placeholder="Select City"
+                    options={optionsCityName}
+                    onchange={handleChange} >     
+                </lightning-combobox>
+                
+                <!-- <template if:true={conRec}>     
+                    <lightning-datatable
+                        key-field="id"
+                        data={conRec}
+                        
+                        contenteditable="true"
+                        hide-checkbox-column="true">
+                        
+                    </lightning-datatable>
+                </template>  listContact.data -> use when it is act as property (change in 20, 27 ,28)-->
+        
+            </lightning-card>
+        </div>
+</template>

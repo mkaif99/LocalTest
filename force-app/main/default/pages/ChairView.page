@@ -1,0 +1,73 @@
+<apex:page controller="ChairController" tabStyle="Contact" >
+    <apex:sectionHeader title="Chair" subtitle="View" />
+    <apex:form >
+    	<apex:pageBlock rendered="{!!isEdit}">
+            <!-- {!aObj} <br/>		GIVE ALL VALUE OF DEFAULT CONS.
+            Chair Type : {!aObj.type} <br/>		GIVE ONE BY ONE
+            Chair Rate : {!aObj.rate} <br/>
+            Chair Color :{!aObj.color}	-->
+            <apex:pageBlockButtons >
+            	<apex:commandButton value="Save" action="{!saveRecord}"  />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Chair Input" collapsible="false" columns="1" >
+                <apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Type</apex:outputLabel>
+                	<apex:inputText value="{!aObj.type}" />
+            	</apex:pageBlockSectionItem>
+            	<apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Rate</apex:outputLabel>
+                	<apex:inputText value="{!aObj.rate}" />
+           		</apex:pageBlockSectionItem>
+            	<apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Color</apex:outputLabel>
+                	<apex:inputText value="{!aObj.color}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock rendered="{!isEdit}">  <!-- {!if(aObj.rate != null && isEdit == false, true, false)}; -->
+           <apex:pageBlockButtons >
+            	<apex:commandButton value="Edit" action="{!EditRecord}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Chair Output" collapsible="false" columns="1">
+                <apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Type</apex:outputLabel>
+                	<apex:outputText value="{!aObj.type}" />
+            	</apex:pageBlockSectionItem>
+            	<apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Rate</apex:outputLabel>
+                	<apex:outputText value="{!aObj.rate}" />
+           		</apex:pageBlockSectionItem>
+            	<apex:pageBlockSectionItem >
+            		<apex:outputLabel >Chair Color</apex:outputLabel>
+                	<apex:outputText value="{!aObj.color}" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Bulk Purchase">
+            <apex:pageBlockSection title="Output Bulk Chair" collapsible="false" columns="1" >
+       	 		<apex:pageBlockTable value="{!ChairList}" var="ch">
+        			<apex:column headerValue="Chair Type" value="{!ch.type}" />
+            		<apex:column headerValue="Chair Rate" value="{!ch.rate}" />
+            		<apex:column headerValue="Chair Color" value="{!ch.color}" />
+        		</apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="Bulk Purchase">
+            <apex:pageBlockSection title="Input Bulk Chair" collapsible="false" columns="1">
+       	 		<apex:pageBlockTable value="{!ChairList}" var="ch">
+                    <apex:column headerValue="Chair Type" >
+                    	<apex:inputText value="{!ch.type}" />
+                    </apex:column>
+                    <apex:column headerValue="Chair Rate" >
+                    	<apex:inputText value="{!ch.rate}" />
+                    </apex:column>
+            		<apex:column headerValue="Chair Color" >
+                    	<apex:inputText value="{!ch.color}" />
+                    </apex:column>
+        		</apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

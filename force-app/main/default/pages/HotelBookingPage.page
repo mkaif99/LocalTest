@@ -1,0 +1,204 @@
+<apex:page controller="HotelBookingController" sidebar="false" showHeader="false" >
+    <apex:stylesheet value="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <apex:stylesheet value="/resources/demos/style.css" />
+ 
+    <apex:includeScript value="https://code.jquery.com/jquery-3.6.0.js"/>  
+    <apex:includeScript value="https://code.jquery.com/ui/1.13.2/jquery-ui.js"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <apex:pageBlock >     
+        <nav class="navbar navbar-expand-sm navbar-light bg-secondary">
+            <a class="navbar-brand" href="#"><apex:pageBlockSection columns="1" >
+                <apex:image value="{!$Resource.HotelLogo}" height="60" width="100" style="margin-left:5px" />
+                </apex:pageBlockSection></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size:17px;font-style:Italic;">
+                <ul class="navbar-nav mr-auto"> 
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/HotelRoomPage">Hotel Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelPage">Hotel Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBookingPage">Hotel Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBillPage">Hotel Bill</a>
+                    </li>
+                </ul>
+                <button class="nav-item" style="border:2px ridge gray;border-radius:40px;margin-left:40px;font-style:italic">
+                        <a class="nav-link" href="/ContactPage">Contact Us</a>
+                </button>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button >
+                    <a href="/HotelMainPage">HOME</a>
+                </button>
+            </div>
+        </nav>
+    </apex:pageBlock>
+    <script>
+        $( function() {
+            $( "#myBox").dialog({autoOpen : false, width: 400, show : {effect : "explode", duration : 2000}, hide : {duration : 2000,effect : "blind"}});
+        } );	
+   
+    	function openBox(){
+        	$("#myBox").dialog("open");
+        }
+		function deleteConfirm(){
+        	let ans = confirm("Are You Sure...!");
+            if(ans == true){
+                alert("You can Delete");
+                myfun();
+            }
+            else			alert("Nhi kr skte");
+        }    
+    </script>
+    									<!-- for Insert page-->
+    <div id="myBox" title="My Custom Dialog" >
+        <apex:form >
+            <apex:pageBlock title="New Hotel RoomBooking" >		
+                <apex:pageBlockButtons >            
+                    <apex:commandButton value="Save" action="{!newRecord}" />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection columns="1" >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Select Customer : </apex:outputLabel>
+                        <apex:selectList value="{!selectCustomer}" size="1">
+                            <apex:selectOption itemLabel="--None--" itemValue=""></apex:selectOption>
+                            <apex:selectOptions value="{!customerList}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Select Room : </apex:outputLabel>
+                        <apex:selectList value="{!selectRoom}" size="1">
+                            <apex:selectOption itemLabel="--None--" itemValue=""></apex:selectOption>
+                            <apex:selectOptions value="{!roomList}"></apex:selectOptions>
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Customer Email : </apex:outputLabel>
+                        <apex:inputField value="{!cObj.Email}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+    <apex:pageMessages ></apex:pageMessages>
+    <apex:form >	
+        <apex:actionStatus id="act1">
+        	<apex:facet name="start">
+                <apex:outputPanel >
+                    <apex:image value="/img/loading.gif" width="30" height="30" />
+                    <apex:outputLabel value="Please wait...!" style="font-size:16px;color:red" ></apex:outputLabel>                    
+                </apex:outputPanel>
+            </apex:facet>
+        </apex:actionStatus>
+        <apex:actionFunction name="actOnClick" action="{!allRecordSelect}" status="act1" reRender="Zx" />
+        <apex:actionFunction name="myfun" action="{!deleteRec}" />
+        <apex:actionFunction name="actOnPagesize1" action="{!selectPageSize}" />
+        <apex:actionFunction name="actOnPageNum" action="{!getPageNumber}" />
+        
+       										 <!-- showing List , Searching , edit-->
+        <apex:pageBlock rendered="{!!isEdit1}"> 
+            <apex:pageBlockSection title="List of RoomBooking" collapsible="false" columns="1" >
+                                
+                <apex:pageBlockSection columns="2" > 
+                        Select No. &nbsp; : &nbsp; <apex:selectList value="{!pageSize}" onchange="actOnPagesize1();return false;" size="1" >
+                        <apex:selectOptions value="{!pageSizeList}" ></apex:selectOptions>
+                        </apex:selectList> 
+                </apex:pageBlockSection>
+                							    	<!-- for searching  -->
+                <apex:commandButton value="Searching...!" action="{!searchClick}" /> 
+                <apex:pageBlockSection rendered="{!Searching}">  
+                        Search 1 : &nbsp;&nbsp;
+                        <apex:outputText > Room_No__c </apex:outputText> 
+                        Search Criteria : &nbsp;&nbsp;&nbsp;&nbsp;
+                        <apex:inputText value="{!searchCriteria1}" />
+                                   
+                    <apex:commandButton value="Go.." action="{!searchData}" />
+                </apex:pageBlockSection>
+                								 <!-- for showing Button -->
+                <apex:commandButton value="New Record" action="{!clickNewRec}" onclick="openBox();return false;" style="float:left" rendered="{!!isEdit1}"/>
+                <apex:commandButton value="Edit All" action="{!editAll}" rendered="{!!isEdit1}"/>
+                
+                									<!-- for showing List -->
+                <apex:pageBlockTable value="{!hotelList}" var="cl">
+                    <apex:column >
+                        <apex:facet name="header" >
+                            <apex:inputCheckbox value="{!allSelect}" onchange="actOnClick();return false;" />
+                        </apex:facet>
+                        <apex:inputCheckbox value="{!cl.selectStatus}"  />
+                    </apex:column>                
+                    <apex:column headerValue="Action" >
+                        <apex:outputPanel rendered="{!cl.rowNum != Index}">
+                            <apex:commandLink value="Edit" action="{!editRecord}" >
+                                <apex:param name="E1" value="{!cl.rowNum}" assignTo="{!Index}" />
+                            </apex:commandLink>&nbsp;|&nbsp;
+                            <apex:commandLink value="Del" onclick="deleteConfirm();return false;" >
+                                <apex:param name="E1" value="{!cl.rowNum}"  assignTo="{!Index}" />
+                            </apex:commandLink> 
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!cl.rowNum == Index}" >
+                            <apex:commandLink value="Save" action="{!newRecord}" />&nbsp;|&nbsp;
+                            <apex:commandLink value="Can" action="{!cancelRec}" />
+                        </apex:outputPanel>
+                    </apex:column>
+                    <apex:column value="{!cl.rowNum}" headerValue="RowNo" />
+                    <apex:column value="{!cl.hotelObj.Name}" />
+                    <apex:column headerValue="Hotel Customer" >
+                        <apex:inputField value="{!cl.hotelObj.Hotel_Customer__c}" rendered="{!cl.rowNum == Index}" />   <!-- for showing Edit on its place -->
+                        <apex:outputField value="{!cl.hotelObj.Hotel_Customer__c}" rendered="{!cl.rowNum != Index}" />
+                    </apex:column>
+                    <apex:column headerValue="Room Name">
+                        <apex:inputField value="{!cl.hotelObj.Room_No__c}" rendered="{!cl.rowNum == Index}" />
+                        <apex:outputField value="{!cl.hotelObj.Room_No__c}" rendered="{!cl.rowNum != Index}" />
+                    </apex:column>
+                    <apex:column headerValue="Customer Email" >
+                        <apex:inputField value="{!cl.hotelObj.Customer_Email__c}" rendered="{!cl.rowNum == Index}" />
+                        <apex:outputField value="{!cl.hotelObj.Customer_Email__c}" rendered="{!cl.rowNum != Index}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        <br/>
+        <br/>
+            										<!-- Pagination -->
+            <apex:outputPanel style="margin-left:40%;" >
+                <apex:commandLink value="First (|<<)" action="{!firstpage}" />
+                <apex:commandLink value="Prev (<<)" action="{!prevpage}" />
+                <apex:commandLink value="Next (>>)" action="{!nextpage}" />
+                <apex:commandLink value="Last (>>|)" action="{!lastpage}" />
+            </apex:outputPanel>
+            <apex:outputPanel style="float:right;" >
+                Select Page&nbsp;:&nbsp;<apex:inputText value="{!pageNum}" size="1" onchange="actOnPageNum();return; false;" />&nbsp;&nbsp;{!totalPage}
+            </apex:outputPanel>
+        </apex:pageBlock>
+        											
+        											<!-- Bulk Edit -->
+		<apex:pageBlock title="RoomBookingEditPages" rendered="{!isEdit1}" >
+        	<apex:pageBlockButtons >
+            	<apex:commandButton value="Save" action="{!saveEdit}" />
+                <apex:commandButton value="Can" action="{!cancelEdit}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!edithotelList}" var="ed">
+                <apex:column headerValue="Hotel Customer" >
+                	<apex:inputField value="{!ed.Hotel_Customer__c}" />
+                </apex:column>
+                <apex:column headerValue="Room Name" >
+                	<apex:inputField value="{!ed.Room_No__c}" />
+                </apex:column>	
+                <apex:column headerValue="Customer Email" >
+                	<apex:inputField value="{!ed.Customer_Email__c}" />
+                </apex:column>	
+            </apex:pageBlockTable>
+        </apex:pageBlock>   
+    </apex:form>
+</apex:page>

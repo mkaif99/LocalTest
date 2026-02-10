@@ -1,0 +1,116 @@
+<apex:page sidebar="false" showHeader="false" >
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <apex:pageBlock >
+    
+        <header class="bg-secondary text-black text-center py-2">
+    		<h1>HOTEL APP</h1>
+  		</header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-secondary">
+            <a class = "navbar-brand text-light" href="#"><apex:image value="{!$Resource.HotelLogo}"  height="60" width="100" style="margin-left:5px"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size:17px;font-style:Italic;"> 
+                <ul class="navbar-nav"> 
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/HotelRoomPage">Hotel Room</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelPage">Hotel Customer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBookingPage">Hotel Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/HotelBillPage">Hotel Bill</a>
+                    </li>
+                    
+                </ul>
+                <button class="nav-item" style="border:2px ridge gray;border-radius:40px;margin-left:40px;font-style:italic">
+                        <a class="nav-link" href="/ContactPage">Contact Us</a>
+                </button>
+            </div>
+        </nav>
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <apex:image value="{!$Resource.HotelImage}" StyleClass="d-block w-100" height="600px" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Our 7 star Hotel</h5>
+                        <p>Our Hotel is Palace.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <apex:image value="{!$Resource.HotelPool}" StyleClass="d-block w-100" height="600px" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Our Pools</h5>
+                        <p>Our pools site Like on a beach.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <apex:image value="{!$Resource.HotwlRoom}" StyleClass="d-block w-100" height="600px" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Our Room</h5>
+                        <p>Rooms are fully furnished and comfortable.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="row">
+                <!-- Facility 1 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <apex:image value="{!$Resource.HG1}" StyleClass="card-img-top" height="300px" />
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">Swimming Pool</h5>
+                            <p class="card-text">Enjoy our spacious swimming pool with a beautiful view.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Facility 2 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <apex:image value="{!$Resource.HG2}" StyleClass="card-img-top" height="300px" />
+                        <div class="card-body">
+                            <h5 class="card-title">Spa  Wellness</h5>
+                            <p class="card-text">Relax and rejuvenate in our state-of-the-art spa facilities.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Facility 3 -->
+                <div class="col-md-4">
+                    <div class="card">
+                        <apex:image value="{!$Resource.HG3}" StyleClass="card-img-top" height="300px" />
+                        <div class="card-body">
+                            <h5 class="card-title">Restaurant</h5>
+                            <p class="card-text">Dine in style at our exquisite on-site restaurant.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </apex:pageBlock>
+    <footer class="bg-dark text-light text-center py-3">
+    	<h3>Thank You for Visit</h3>
+  	</footer>
+</apex:page>

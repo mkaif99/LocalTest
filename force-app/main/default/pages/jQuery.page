@@ -1,0 +1,79 @@
+<apex:page controller="HotelController" >
+    <apex:stylesheet value="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <apex:stylesheet value="/resources/demos/style.css" />
+ 
+    <apex:includeScript value="https://code.jquery.com/jquery-3.6.0.js"/>  
+   <apex:includeScript value="https://code.jquery.com/ui/1.13.2/jquery-ui.js"/> 
+ <!--    <apex:includeScript value="{!$Resource.jQuery}"/>  -->
+  <script>
+  $( function() {
+     $("#myBox").dialog({autoOpen: false,show:{effect: "blind",duration: 1000}, hide:{effect: "explode", duration: 1000}}),
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  } );
+    function openBox(){
+       $("#myBox").dialog("open");
+      }
+  </script>
+ 
+<div id="dialog" title="Basic dialog">
+  <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+</div>
+<apex:form >
+	<apex:commandButton value="new Rec" onclick="openBox();return false;" />    
+</apex:form>
+<button id="opener">Open Dialog</button>
+    
+<div id="myBox" title="My Custom Dialog">
+        <apex:form >
+            
+            <apex:pageBlock title="Hotel Customer" >		
+                <apex:pageBlockButtons >            
+                    <apex:commandButton value="Save" action="{!newRecord}" />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >First Name :</apex:outputLabel>
+                        <apex:inputText value="{!hObj.First_Name__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Last Name :</apex:outputLabel>
+                        <apex:inputText value="{!hObj.Last_Name__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Gender :</apex:outputLabel>
+                        <apex:inputField value="{!hObj.Gender__c}" />
+                        <!--  <apex:outputLabel>Gender :</apex:outputLabel>
+								<apex:inputText value="{!hObj.Gender__c}" />	-->
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >Phone No :</apex:outputLabel>
+                        <apex:inputText value="{!hObj.Phone_No__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >State :</apex:outputLabel>
+                        <apex:inputField value="{!hObj.State__c}" />
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >City :</apex:outputLabel>
+                        <apex:inputField value="{!hObj.City__c}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            
+        </apex:form>
+    </div>
+</apex:page>

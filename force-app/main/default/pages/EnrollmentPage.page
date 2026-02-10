@@ -1,0 +1,50 @@
+<apex:page Controller="EnrollmentController" >
+    <apex:sectionHeader title="Enrollment" subtitle="New Enrollment" />
+    <apex:form >
+    <apex:pageBlock title="Input Enrolling Page" rendered="{!if(courseObj.Id==null,true,false)}" >
+    	<apex:pageBlockButtons >
+        	<apex:commandButton value="Save" action="{!saveRecord}" />
+            <apex:commandButton value="Cancel" action="/a02/o" immediate="true" /> 
+		</apex:pageBlockButtons>
+		<apex:pageBlockSection title="Courser Info" collapsible="false" >
+        	<apex:inputField value="{!courseObj.Course_Title__c}"/>
+            <apex:inputField value="{!courseObj.Duration__c}"/>
+            <apex:inputField value="{!courseObj.Type_Of_Course__c}"/>
+            <apex:inputField value="{!courseObj.Fees__c}"/>
+        </apex:pageBlockSection>   
+        <apex:pageBlockSection title="Student Info" collapsible="false" >
+            <apex:inputField value="{!studentObj.First_Name__c	}" />
+            <apex:inputField value="{!studentObj.Last_Name__c}" />
+            <apex:inputField value="{!studentObj.Gender__c}" />
+            <apex:inputField value="{!studentObj.Email__c}" />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Enrollment Info" collapsible="false" >
+        	<apex:inputField value="{!enrolObj.Enrollment_Date__c}" />
+            <apex:inputField value="{!enrolObj.Email_ID__c}" />
+        </apex:pageBlockSection>
+	</apex:pageBlock>
+        
+    <apex:pageBlock title="Output Enrolling Page" rendered="{!if(courseObj.Id!=null,true,false)}" >
+    	<apex:pageBlockButtons >
+        	<apex:commandButton value="Edit" />
+            <apex:commandButton value="Delete" action="{!deleteRecord}" /> 
+		</apex:pageBlockButtons>
+		<apex:pageBlockSection title="Course Info" collapsible="false" >
+        	<apex:outputField value="{!courseObj.Course_Title__c}"/>
+            <apex:outputField value="{!courseObj.Duration__c}"/>
+            <apex:outputField value="{!courseObj.Type_Of_Course__c}"/>
+            <apex:outputField value="{!courseObj.Fees__c}"/>
+        </apex:pageBlockSection>   
+        <apex:pageBlockSection title="Student Info" collapsible="false" >
+            <apex:outputField value="{!studentObj.First_Name__c	}" />
+            <apex:outputField value="{!studentObj.Last_Name__c}" />
+            <apex:outputField value="{!studentObj.Gender__c}" />
+            <apex:outputField value="{!studentObj.Email__c}" />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Enrollment Info" collapsible="false" >
+        	<apex:outputField value="{!enrolObj.Enrollment_Date__c}" />
+            <apex:outputField value="{!enrolObj.Email_ID__c}" />
+        </apex:pageBlockSection>
+	</apex:pageBlock>
+    </apex:form>
+</apex:page>

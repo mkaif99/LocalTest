@@ -1,0 +1,35 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+        <!-- Header Section -->
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-12">
+                <lightning-icon icon-name="action:approval" alternative-text="Student Details Icon" size="small" class="slds-icon_container"></lightning-icon>
+            </div>
+            <div class="slds-col slds-size_11-of-12 slds-m-top_small">
+                <h1 class="slds-text-heading_medium">Student Details</h1>
+            </div>
+        </div>
+        <template for:each={stdata} for:item="num">
+            <div key={num}>
+        <!-- Image Section -->
+                <div class="slds-grid slds-wrap slds-align_absolute-center slds-m-top_medium">
+                    <div class="slds-size_12-of-12 slds-align_absolute-center">
+                        <img src={num.ImageUrl__c} alt="Student Image" class="student-image"
+                            style="border: 1px solid black; border-radius:5px;" />
+                    </div>
+                </div>
+                <!-- {num.ImageUrl__c} -->
+                <!-- Details Section -->
+                <div class="slds-m-top_medium">
+                    <p><strong>Name:</strong> {num.Full_Name__c}</p>
+                    <p><strong>City:</strong> {num.City__c}</p>
+                    <p><strong>Email:</strong> {num.Email__c}</p>
+                </div>
+            </div>
+        </template>
+        <!-- Footer -->
+        <div class="slds-card__footer slds-m-top_medium">
+            <p class="slds-text-title">Student's Detail</p>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,37 @@
+<apex:page Controller="CourseController">
+    <apex:sectionHeader title="Custom Course" />
+    <apex:form >
+        <apex:pageBlock title="Input" rendered="{!if(courseObj.Id == null || isEditClick == true,true,false)}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveGo}"/>
+                <apex:commandButton value="Quick Save" action="{!saveRecord}"/>
+                <apex:commandButton value="Save and New" action="{!saveNew}"/>
+                <apex:commandButton value="Cancel" action="/a00/o" immediate="true" />
+            </apex:pageBlockButtons>
+        
+            <apex:pageBlockSection collapsible="false" title="Input">
+                <apex:inputField value="{!courseObj.Course_Title__c}"/>
+                <apex:inputField value="{!courseObj.Duration__c}"/>
+                <apex:inputField value="{!courseObj.Type_Of_Course__c}"/>
+                <apex:inputField value="{!courseObj.Fees__c}"/>
+                <apex:inputField value="{!courseObj.Subjets__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Output" rendered="{!if(courseObj.Id != null && isEditClick == false,true,false)}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Edit" action="{!editRecord}"/>
+             	<apex:commandButton value="Delete" action="{!deleteRecord}"/>
+                <apex:commandButton value="Clone" action="{!cloneRecord}" />
+            </apex:pageBlockButtons>
+        
+            <apex:pageBlockSection collapsible="false" title="Output">
+                <apex:outputField value="{!courseObj.Course_Title__c}"/>
+                <apex:outputField value="{!courseObj.Duration__c}"/>
+                <apex:outputField value="{!courseObj.Type_Of_Course__c}"/>
+                <apex:outputField value="{!courseObj.Fees__c}"/>
+                <apex:outputField value="{!courseObj.Subjets__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
